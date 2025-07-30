@@ -3,224 +3,314 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shred-it Style Menu</title>
+  <title>Shred-it Ultra Clone Menu</title>
+  <!-- Google Fonts for similar look (Roboto + Montserrat) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700,500,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   <style>
-    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; }
-    .navbar {
-      background: #1e2c5c;
+    :root {
+      --blue: #1e2c5c;
+      --yellow: #ffd200;
+      --yellow-hover: #ffe266;
+      --white: #fff;
+      --link-blue: #247fff;
+      --box-shadow: 0 2px 8px rgba(30,44,92,0.04);
+      --transition: 0.18s cubic-bezier(.4,0,.2,1);
+    }
+    body {
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: #f6f7f9;
+    }
+    nav {
+      background: var(--blue);
+      color: var(--white);
+      position: sticky; top: 0; left:0; right:0;
+      width: 100%;
+      box-shadow: var(--box-shadow);
+      z-index: 999;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      font-size: 1rem;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
-      height: 70px;
-      position: relative;
-      z-index: 10;
+      padding: 0 30px;
+      height: 72px;
     }
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: #fff;
-      font-size: 2em;
+      gap: 13px;
+      font-size: 2.1em;
       font-weight: 700;
+      letter-spacing: 1.2px;
       text-decoration: none;
-      letter-spacing: 2px;
+      color: var(--white);
+      height: 54px;
     }
-    .logo i { color: #ffd200; font-size: 1.3em; }
-    .navbar-menu {
+    .logo i {
+      color: var(--yellow);
+      font-size: 1.1em;
+    }
+    .main-menu {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 13px;
+      height: 100%;
     }
-    .navbar-menu ul {
+    .main-menu ul {
+      display: flex;
+      align-items: center;
+      gap: 2px;
       list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin: 0;
       padding: 0;
+      margin: 0;
+      height: 100%;
     }
-    .navbar-menu li {
+    .main-menu > ul > li {
       position: relative;
+      height: 100%;
     }
-    .navbar-menu > ul > li > a {
-      color: #fff;
+    .main-menu > ul > li > a {
+      color: var(--white);
       text-decoration: none;
-      padding: 18px 16px;
-      font-size: 1em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      border-radius: 3px;
-      transition: background 0.2s, color 0.2s;
-      cursor: pointer;
-    }
-    .navbar-menu > ul > li > a:hover {
-      background: #14316a;
-      color: #ffd200;
-    }
-    /* Dropdown */
-    .navbar-menu li .dropdown {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 62px;
-      background: #1e2c5c;
-      min-width: 180px;
-      box-shadow: 0 8px 22px rgba(30,44,92,0.1);
-      border-radius: 0 0 6px 6px;
-      z-index: 100;
-      animation: fadeIn 0.25s;
-    }
-    .navbar-menu li:hover > .dropdown,
-    .navbar-menu li:focus-within > .dropdown {
-      display: block;
-    }
-    .navbar-menu .dropdown a {
-      color: #fff;
-      padding: 13px 24px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      font-size: 1em;
-      transition: background 0.2s, color 0.2s;
-    }
-    .navbar-menu .dropdown a:hover {
-      background: #14316a;
-      color: #ffd200;
-    }
-    /* Contact & Quote */
-    .navbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .navbar-actions .phone {
-      color: #fff;
+      padding: 0 24px;
+      height: 72px;
       display: flex;
       align-items: center;
       gap: 6px;
+      font-weight: 500;
+      font-size: 1.03em;
+      position: relative;
+      transition: color var(--transition), background var(--transition);
+      border-bottom: 3px solid transparent;
+      letter-spacing: 0.5px;
+    }
+    .main-menu > ul > li:hover > a,
+    .main-menu > ul > li > a:focus {
+      color: var(--yellow);
+      border-bottom: 3px solid var(--yellow);
+      background: #22316a;
+    }
+    /* Dropdown styles */
+    .main-menu li .dropdown {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 72px;
+      background: var(--blue);
+      min-width: 220px;
+      box-shadow: 0 10px 24px rgba(30,44,92,0.13);
+      border-radius: 0 0 11px 11px;
+      z-index: 100;
+      flex-direction: column;
+      animation: fadeIn .23s;
+    }
+    .main-menu li:hover > .dropdown,
+    .main-menu li:focus-within > .dropdown {
+      display: flex;
+    }
+    .main-menu .dropdown a {
+      color: var(--white);
+      padding: 15px 32px 15px 28px;
+      text-decoration: none;
       font-size: 1em;
-      text-decoration: none;
-    }
-    .navbar-actions .phone i {
-      color: #ffd200;
-      font-size: 1.2em;
-    }
-    .navbar-actions .quote-btn {
-      background: #ffd200;
-      color: #1e2c5c;
-      padding: 11px 24px;
-      border-radius: 4px;
-      font-weight: 700;
-      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #233160;
+      transition: background var(--transition), color var(--transition);
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 1.05em;
-      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
     }
-    .navbar-actions .quote-btn:hover {
-      background: #f2e08a;
-      color: #14316a;
+    .main-menu .dropdown a:last-child {
+      border-bottom: none;
+    }
+    .main-menu .dropdown a:hover {
+      background: var(--yellow);
+      color: var(--blue);
+    }
+    /* Actions */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-left: 16px;
+    }
+    .phone {
+      color: var(--white);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 1.06em;
+      text-decoration: none;
+      transition: color var(--transition);
+      letter-spacing: 0.2px;
+    }
+    .phone i { color: var(--yellow); font-size:1.2em;}
+    .phone:hover { color: var(--yellow);}
+    .quote-btn {
+      background: var(--yellow);
+      color: var(--blue);
+      padding: 12px 34px 12px 23px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.15em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 8px 0 rgba(0,0,0,0.06);
+      border: none;
+      transition: background var(--transition), color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-btn i {
+      margin-left: 7px;
+      font-size: 1.13em;
+      transition: margin-left .19s;
+    }
+    .quote-btn:hover {
+      background: var(--yellow-hover);
+      color: var(--blue);
+    }
+    .quote-btn:hover i {
+      margin-left: 13px;
     }
     /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
       cursor: pointer;
-      margin-left: 16px;
+      margin-left: 18px;
+      z-index: 1100;
+      border: none;
+      background: transparent;
     }
     .hamburger span {
-      height: 3px;
-      width: 25px;
-      background: #ffd200;
-      margin: 4px 0;
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: var(--yellow);
       border-radius: 2px;
-      transition: 0.4s;
+      margin: 6px 0;
+      transition: all .4s cubic-bezier(.4,0,.2,1);
     }
-    /* Responsive */
-    @media (max-width: 950px) {
-      .navbar-menu,
-      .navbar-actions {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(30,44,92,0.98);
-        flex-direction: column;
-        z-index: 1000;
-        padding-top: 80px;
-        gap: 0;
-      }
-      .mobile-menu.open {
-        display: flex;
-      }
-      .mobile-menu ul {
-        list-style: none;
-        width: 100%;
-        padding: 0;
-      }
-      .mobile-menu li {
-        width: 100%;
-        border-bottom: 1px solid #24356b;
-      }
-      .mobile-menu > ul > li > a {
-        color: #fff;
-        padding: 20px 32px;
-        text-decoration: none;
-        font-size: 1.12em;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .mobile-menu .dropdown {
-        display: none;
-        flex-direction: column;
-        background: #22316a;
-        border-radius: 0 0 6px 6px;
-      }
-      .mobile-menu li.open > .dropdown {
-        display: flex;
-      }
-      .mobile-menu .dropdown a {
-        padding: 15px 48px;
-        color: #fff;
-        font-size: 0.98em;
-      }
-      .mobile-actions {
-        margin: 20px 32px 0 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-      .mobile-actions .quote-btn, .mobile-actions .phone {
-        width: 100%;
-        justify-content: flex-start;
-      }
+    /* Mobile menu overlay */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(30,44,92,0.97);
+      z-index: 1099;
+      flex-direction: column;
+      padding-top: 88px;
+      animation: fadeIn .23s;
+    }
+    .mobile-overlay.open { display: flex; }
+    .mobile-overlay ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .mobile-overlay li {
+      width: 100%;
+      border-bottom: 1px solid #233160;
+    }
+    .mobile-overlay > ul > li > a {
+      color: var(--white);
+      padding: 22px 38px;
+      text-decoration: none;
+      font-size: 1.13em;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: background var(--transition), color var(--transition);
+      letter-spacing: 0.2px;
+      position: relative;
+    }
+    .mobile-overlay > ul > li > a:hover {
+      background: var(--yellow);
+      color: var(--blue);
+    }
+    .mobile-overlay .dropdown {
+      display: none;
+      flex-direction: column;
+      background: #22316a;
+      border-radius: 0 0 8px 8px;
+      animation: fadeIn .23s;
+    }
+    .mobile-overlay li.open > .dropdown {
+      display: flex;
+    }
+    .mobile-overlay .dropdown a {
+      padding: 16px 51px;
+      color: var(--white);
+      font-size: 1em;
+      text-decoration: none;
+      border-bottom: 1px solid #233160;
+      transition: background var(--transition), color var(--transition);
+    }
+    .mobile-overlay .dropdown a:last-child {
+      border-bottom: none;
+    }
+    .mobile-overlay .dropdown a:hover {
+      background: var(--yellow);
+      color: var(--blue);
+    }
+    .mobile-actions {
+      margin: 30px 38px 0 38px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-actions .quote-btn,
+    .mobile-actions .phone {
+      width: 100%;
+      justify-content: flex-start;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .nav-container { padding: 0 12px;}
+      .main-menu > ul > li > a { padding: 0 12px;}
+    }
+    @media (max-width: 970px) {
+      .main-menu, .actions { display: none; }
+      .hamburger { display: flex;}
+      .logo { font-size: 1.6em;}
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px);}
+      from { opacity: 0; transform: translateY(-10px);}
       to { opacity: 1; transform: translateY(0);}
     }
+    ::selection { background: var(--yellow); color: var(--blue);}
   </style>
 </head>
 <body>
-  <nav class="navbar">
+<nav>
+  <div class="nav-container">
     <a href="#" class="logo">
+      <!-- Puedes reemplazar el icono por el SVG oficial de Shred-it para mayor fidelidad -->
       <i class="fas fa-shield-alt"></i>
       Shred-it
     </a>
-    <div class="navbar-menu">
+    <div class="main-menu">
       <ul>
-        <li><a href="#">Industries <i class="fas fa-chevron-down" style="font-size:0.83em"></i></a>
+        <li>
+          <a href="#">Industries <i class="fas fa-chevron-down" style="font-size:0.90em"></i></a>
           <div class="dropdown">
             <a href="#">Healthcare</a>
             <a href="#">Financial</a>
@@ -228,7 +318,8 @@
             <a href="#">Education</a>
           </div>
         </li>
-        <li><a href="#">Services <i class="fas fa-chevron-down" style="font-size:0.83em"></i></a>
+        <li>
+          <a href="#">Services <i class="fas fa-chevron-down" style="font-size:0.90em"></i></a>
           <div class="dropdown">
             <a href="#">Document Shredding</a>
             <a href="#">Hard Drive Destruction</a>
@@ -240,7 +331,7 @@
         <li><a href="#">Resources</a></li>
       </ul>
     </div>
-    <div class="navbar-actions">
+    <div class="actions">
       <a href="tel:18006979900" class="phone">
         <i class="fas fa-phone"></i>
         1-800-697-9900
@@ -249,66 +340,80 @@
         Get a Quote <i class="fas fa-arrow-right"></i>
       </a>
     </div>
-    <div class="hamburger" id="hamburger">
+    <button class="hamburger" id="hamburger" aria-label="Open mobile menu">
       <span></span>
       <span></span>
       <span></span>
-    </div>
-  </nav>
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li>
-        <a href="#" onclick="toggleDropdown(event,0)">Industries <i class="fas fa-chevron-down"></i></a>
-        <div class="dropdown">
-          <a href="#">Healthcare</a>
-          <a href="#">Financial</a>
-          <a href="#">Legal</a>
-          <a href="#">Education</a>
-        </div>
-      </li>
-      <li>
-        <a href="#" onclick="toggleDropdown(event,1)">Services <i class="fas fa-chevron-down"></i></a>
-        <div class="dropdown">
-          <a href="#">Document Shredding</a>
-          <a href="#">Hard Drive Destruction</a>
-          <a href="#">Regularly Scheduled</a>
-          <a href="#">One-Time Purge</a>
-        </div>
-      </li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Resources</a></li>
-    </ul>
-    <div class="mobile-actions">
-      <a href="tel:18006979900" class="phone">
-        <i class="fas fa-phone"></i>
-        1-800-697-9900
-      </a>
-      <a href="#" class="quote-btn">
-        Get a Quote <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
+    </button>
   </div>
-  <script>
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      mobileMenu.classList.toggle('open');
+</nav>
+<!-- Mobile overlay menu -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <ul>
+    <li>
+      <a href="#" onclick="toggleMobileDropdown(event,0)">Industries <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="#">Healthcare</a>
+        <a href="#">Financial</a>
+        <a href="#">Legal</a>
+        <a href="#">Education</a>
+      </div>
+    </li>
+    <li>
+      <a href="#" onclick="toggleMobileDropdown(event,1)">Services <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="#">Document Shredding</a>
+        <a href="#">Hard Drive Destruction</a>
+        <a href="#">Regularly Scheduled</a>
+        <a href="#">One-Time Purge</a>
+      </div>
+    </li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Resources</a></li>
+  </ul>
+  <div class="mobile-actions">
+    <a href="tel:18006979900" class="phone">
+      <i class="fas fa-phone"></i>
+      1-800-697-9900
+    </a>
+    <a href="#" class="quote-btn">
+      Get a Quote <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</div>
+<script>
+  // Hamburger open/close
+  const hamburger = document.getElementById('hamburger');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  hamburger.addEventListener('click', function() {
+    mobileOverlay.classList.toggle('open');
+    document.body.style.overflow = mobileOverlay.classList.contains('open') ? 'hidden' : '';
+  });
+  // Mobile dropdowns
+  function toggleMobileDropdown(event, index) {
+    event.preventDefault();
+    const lis = mobileOverlay.querySelectorAll('ul > li');
+    lis.forEach((li, i) => {
+      if (i === index) {
+        li.classList.toggle('open');
+      } else {
+        li.classList.remove('open');
+      }
     });
-
-    // Mobile dropdowns
-    function toggleDropdown(event, index) {
-      event.preventDefault();
-      const lis = mobileMenu.querySelectorAll('ul > li');
-      lis.forEach((li, i) => {
-        if (i === index) {
-          li.classList.toggle('open');
-        } else {
-          li.classList.remove('open');
-        }
-      });
+  }
+  // Close overlay on click outside or ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape" && mobileOverlay.classList.contains('open')) {
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
-  </script>
+  });
+  mobileOverlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
 </body>
 </html>
