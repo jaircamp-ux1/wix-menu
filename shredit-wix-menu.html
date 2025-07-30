@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shred-it Style Menu</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; }
+    .navbar {
+      background: #1e2c5c;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 70px;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 2em;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .logo i { color: #ffd200; font-size: 1.3em; }
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .navbar-menu ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar-menu li {
+      position: relative;
+    }
+    .navbar-menu > ul > li > a {
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 16px;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .navbar-menu > ul > li > a:hover {
+      background: #14316a;
+      color: #ffd200;
+    }
+    /* Dropdown */
+    .navbar-menu li .dropdown {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 62px;
+      background: #1e2c5c;
+      min-width: 180px;
+      box-shadow: 0 8px 22px rgba(30,44,92,0.1);
+      border-radius: 0 0 6px 6px;
+      z-index: 100;
+      animation: fadeIn 0.25s;
+    }
+    .navbar-menu li:hover > .dropdown,
+    .navbar-menu li:focus-within > .dropdown {
+      display: block;
+    }
+    .navbar-menu .dropdown a {
+      color: #fff;
+      padding: 13px 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .navbar-menu .dropdown a:hover {
+      background: #14316a;
+      color: #ffd200;
+    }
+    /* Contact & Quote */
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .navbar-actions .phone {
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1em;
+      text-decoration: none;
+    }
+    .navbar-actions .phone i {
+      color: #ffd200;
+      font-size: 1.2em;
+    }
+    .navbar-actions .quote-btn {
+      background: #ffd200;
+      color: #1e2c5c;
+      padding: 11px 24px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .navbar-actions .quote-btn:hover {
+      background: #f2e08a;
+      color: #14316a;
+    }
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 16px;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: #ffd200;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.4s;
+    }
+    /* Responsive */
+    @media (max-width: 950px) {
+      .navbar-menu,
+      .navbar-actions {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(30,44,92,0.98);
+        flex-direction: column;
+        z-index: 1000;
+        padding-top: 80px;
+        gap: 0;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu ul {
+        list-style: none;
+        width: 100%;
+        padding: 0;
+      }
+      .mobile-menu li {
+        width: 100%;
+        border-bottom: 1px solid #24356b;
+      }
+      .mobile-menu > ul > li > a {
+        color: #fff;
+        padding: 20px 32px;
+        text-decoration: none;
+        font-size: 1.12em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mobile-menu .dropdown {
+        display: none;
+        flex-direction: column;
+        background: #22316a;
+        border-radius: 0 0 6px 6px;
+      }
+      .mobile-menu li.open > .dropdown {
+        display: flex;
+      }
+      .mobile-menu .dropdown a {
+        padding: 15px 48px;
+        color: #fff;
+        font-size: 0.98em;
+      }
+      .mobile-actions {
+        margin: 20px 32px 0 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .mobile-actions .quote-btn, .mobile-actions .phone {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="logo">
+      <i class="fas fa-shield-alt"></i>
+      Shred-it
+    </a>
+    <div class="navbar-menu">
+      <ul>
+        <li><a href="#">Industries <i class="fas fa-chevron-down" style="font-size:0.83em"></i></a>
+          <div class="dropdown">
+            <a href="#">Healthcare</a>
+            <a href="#">Financial</a>
+            <a href="#">Legal</a>
+            <a href="#">Education</a>
+          </div>
+        </li>
+        <li><a href="#">Services <i class="fas fa-chevron-down" style="font-size:0.83em"></i></a>
+          <div class="dropdown">
+            <a href="#">Document Shredding</a>
+            <a href="#">Hard Drive Destruction</a>
+            <a href="#">Regularly Scheduled</a>
+            <a href="#">One-Time Purge</a>
+          </div>
+        </li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Resources</a></li>
+      </ul>
+    </div>
+    <div class="navbar-actions">
+      <a href="tel:18006979900" class="phone">
+        <i class="fas fa-phone"></i>
+        1-800-697-9900
+      </a>
+      <a href="#" class="quote-btn">
+        Get a Quote <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li>
+        <a href="#" onclick="toggleDropdown(event,0)">Industries <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#">Healthcare</a>
+          <a href="#">Financial</a>
+          <a href="#">Legal</a>
+          <a href="#">Education</a>
+        </div>
+      </li>
+      <li>
+        <a href="#" onclick="toggleDropdown(event,1)">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown">
+          <a href="#">Document Shredding</a>
+          <a href="#">Hard Drive Destruction</a>
+          <a href="#">Regularly Scheduled</a>
+          <a href="#">One-Time Purge</a>
+        </div>
+      </li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Resources</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a href="tel:18006979900" class="phone">
+        <i class="fas fa-phone"></i>
+        1-800-697-9900
+      </a>
+      <a href="#" class="quote-btn">
+        Get a Quote <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Mobile dropdowns
+    function toggleDropdown(event, index) {
+      event.preventDefault();
+      const lis = mobileMenu.querySelectorAll('ul > li');
+      lis.forEach((li, i) => {
+        if (i === index) {
+          li.classList.toggle('open');
+        } else {
+          li.classList.remove('open');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
